@@ -1,12 +1,12 @@
-package dev.dachai.movies;
+package dev.dachai.movies.controller;
 
+import dev.dachai.movies.model.Review;
+import dev.dachai.movies.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Map;
 
 @RestController

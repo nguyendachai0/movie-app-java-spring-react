@@ -1,5 +1,8 @@
-package dev.dachai.movies;
+package dev.dachai.movies.service;
 
+import dev.dachai.movies.model.Movie;
+import dev.dachai.movies.model.Review;
+import dev.dachai.movies.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
