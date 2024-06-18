@@ -64,6 +64,7 @@ function App() {
             <Route path="/Trailer/:ytTrailerId" element={<Trailer/>}></Route>
             <Route path="/Reviews/:movieId" element ={<Reviews getMovieData = {getMovieData} movie={movie} reviews={reviews} setReviews = {setReviews} />}></Route>
             <Route path="/admin" element={< MovieAdmin/>} />
+            <Route path="/admin/:id" element={< MovieAdmin/>} />
             {/* <Route path="*" element = {<NotFound/>}></Route> */}
           </Route>
       </Routes>
