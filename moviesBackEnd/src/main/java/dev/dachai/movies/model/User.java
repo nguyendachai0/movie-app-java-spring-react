@@ -20,7 +20,6 @@ public class User {
     private String username;
     private String email;
     private String password;
-    @DocumentReference
-    private Role roleId;
+    private String role;
 
 }
