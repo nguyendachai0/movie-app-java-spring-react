@@ -8,12 +8,10 @@ import Header from './components/header/Header';
 import Trailer from './components/trailer/Trailer';
 import Reviews from './components/reviews/Reviews';
 import MovieAdmin from './components/admin/MovieAdmin';
+import  Login  from  './components/auth/Login';
 // import NotFound from './components/notFound/NotFound';
 
 function App() {
-
- 
-
   const [movies, setMovies] = useState();
   const [movie, setMovie] = useState();
   const [reviews, setReviews] = useState([]);
@@ -65,7 +63,7 @@ function App() {
             <Route path="/Reviews/:movieId" element ={<Reviews getMovieData = {getMovieData} movie={movie} reviews={reviews} setReviews = {setReviews} />}></Route>
             <Route path="/admin" element={< MovieAdmin/>} />
             <Route path="/admin/:id" element={< MovieAdmin/>} />
-            {/* <Route path="*" element = {<NotFound/>}></Route> */}
+            <Route path="/login" element = {<Login/>}></Route>
           </Route>
       </Routes>
 

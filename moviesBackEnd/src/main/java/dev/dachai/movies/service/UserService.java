@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,28 +19,32 @@ import java.util.Optional;
 @Service
 
 public class UserService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        Optional<User>  user  =  userRepository.findUserByUsername(username);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
+        Optional<User>  user  =  userRepository.findUserByEmail(email);
         if(user.isPresent()){
             var userObj  =  user.get();
-           return User.builder()
+           return  org.springframework.security.core.userdetails.User.builder()
                     .username(userObj.getUsername())
                     .password(userObj.getPassword())
                     .roles(userObj.getRole())
                     .build();
         }else{
-            throw new UsernameNotFoundException();
+            throw new UsernameNotFoundException(email);
         }
 
     }
-    private String[] getRoles(MyUser user){
+    private String[] getRoles(User user){
         if(user.getRole()  ==  null){
-            return  new  String[]
+            return new String[]{"User"};
         }
+        return user.getRole().split(",");
     }
 
 
