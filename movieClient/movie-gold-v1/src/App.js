@@ -9,6 +9,7 @@ import Trailer from './components/trailer/Trailer';
 import Reviews from './components/reviews/Reviews';
 import MovieAdmin from './components/admin/MovieAdmin';
 import  Login  from  './components/auth/Login';
+import ProtectedRouteAdmin from './router/ProtectedRouteAdmin';
 // import NotFound from './components/notFound/NotFound';
 
 function App() {
@@ -61,8 +62,10 @@ function App() {
             <Route path="/" element={<Home movies={movies} />} ></Route>
             <Route path="/Trailer/:ytTrailerId" element={<Trailer/>}></Route>
             <Route path="/Reviews/:movieId" element ={<Reviews getMovieData = {getMovieData} movie={movie} reviews={reviews} setReviews = {setReviews} />}></Route>
+            <Route element={<ProtectedRouteAdmin/>}>
             <Route path="/admin" element={< MovieAdmin/>} />
             <Route path="/admin/:id" element={< MovieAdmin/>} />
+            </Route>
             <Route path="/login" element = {<Login/>}></Route>
           </Route>
       </Routes>

@@ -26,14 +26,15 @@ public class UserService implements UserDetailsService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
         Optional<User>  user  =  userRepository.findUserByEmail(email);
         if(user.isPresent()){
             var userObj  =  user.get();
            return  org.springframework.security.core.userdetails.User.builder()
-                    .username(userObj.getUsername())
+                    .username(userObj.getEmail())
                     .password(userObj.getPassword())
-                    .roles(userObj.getRole())
+                    .roles(getRoles(userObj))
                     .build();
         }else{
             throw new UsernameNotFoundException(email);

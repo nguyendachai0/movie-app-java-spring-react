@@ -14,9 +14,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:8080/login`, { email, password });
+      const response = await axios.post(`http://localhost:8080/authenticate`, { email, password });
+      
       if (response.status === 200) {
-        navigate('/dashboard'); // Redirect to dashboard on successful login
+        const token = response.data;
+        localStorage.setItem('token', token);
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        navigate('/dashboard'); // Redirect to dashboard on successful loginjjuk=
       }
     } catch (error) {
       setError('Invalid username or password');
